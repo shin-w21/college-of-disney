@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walter Disney University</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --disney-blue: #003087;
+    --disney-gold: #C8A84B;
+    --disney-dark: #0A0A2E;
+    --disney-midnight: #0D1B4B;
+    --disney-sky: #1A3A8A;
+    --disney-light-gold: #F5E6B8;
+    --disney-cream: #FDF8EE;
+    --disney-accent: #E8C84A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Noto Serif JP", "游明朝", "Yu Mincho", serif;
+    background: var(--disney-dark);
+    color: var(--disney-cream);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(200, 168, 75, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(26, 58, 138, 0.15) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A84B' fill-opacity='0.03'%3E%3Cpath d='M30 0 L31.5 10 L40 5 L34 13 L44 12 L36 18 L45 22 L35 23 L40 32 L30 27 L20 32 L25 23 L15 22 L24 18 L16 12 L26 13 L20 5 L28.5 10 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(200, 168, 75, 0.3), 0 4px 30px rgba(200, 168, 75, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(200, 168, 75, 0.6), 0 4px 50px rgba(200, 168, 75, 0.4); }
+  }
+
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--duration, 3s) var(--delay, 0s) infinite;
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .castle {
+    font-size: 64px;
+    animation: float 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(200, 168, 75, 0.5));
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .db-badge {
+    background: linear-gradient(135deg, var(--disney-gold), var(--disney-accent));
+    color: var(--disney-dark);
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 900;
+    font-family: 'Cinzel', serif;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 12px rgba(200, 168, 75, 0.5);
+  }
+  .portal-text {
+    font-family: 'Cinzel', serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    background: linear-gradient(135deg, #fff 0%, var(--disney-light-gold) 50%, #fff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: rgba(200, 168, 75, 0.6);
+    letter-spacing: 4px;
+  }
+
+  .enter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--disney-midnight), var(--disney-sky));
+    border: 1px solid var(--disney-gold);
+    color: var(--disney-accent);
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    padding: 16px 48px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    animation: pulse-glow 3s ease-in-out infinite;
+    transition: background 0.25s, color 0.25s, transform 0.15s;
+  }
+  .enter-btn:hover {
+    background: linear-gradient(135deg, var(--disney-gold), var(--disney-accent));
+    color: var(--disney-dark);
+    transform: translateY(-2px);
+  }
+  .enter-btn:active {
+    transform: translateY(0);
+  }
+
+  .copyright {
+    position: fixed;
+    bottom: 16px;
+    right: 20px;
+    z-index: 10;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: rgba(200, 168, 75, 0.45);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="content">
+  <div class="castle">🏰</div>
+
+  <div class="logo">
+    <div class="logo-row">
+      <span class="portal-text">Walter Disney University</span>
+    </div>
+    <div class="subtitle">講義シラバスはこちらのサイトに移りました。</div>
+  </div>
+
+  <a class="enter-btn" href="https://shin-w21.github.io/WalterDisneyUniversity/index.html" target="_blank">
+    ✦ &nbsp; ENTER &nbsp; ✦
+  </a>
+</div>
+
+<div class="copyright">✦ Copyright sh1n*</div>
+
+<script>
+  const sc = document.getElementById('stars');
+  for (let i = 0; i < 150; i++) {
+    const s = document.createElement('div');
+    const size = Math.random() > 0.85 ? 3 : 2;
+    s.className = 'star';
+    s.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      width: ${size}px;
+      height: ${size}px;
+      --duration: ${2 + Math.random() * 4}s;
+      --delay: ${Math.random() * 5}s;
+      opacity: ${Math.random() * 0.7 + 0.1};
+    `;
+    sc.appendChild(s);
+  }
+</script>
+</body>
+</html>
